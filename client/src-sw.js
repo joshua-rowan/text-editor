@@ -27,7 +27,17 @@ warmStrategyCache({
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
-registerRoute();
+registerRoute(
+  ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
+  new CacheFirst({
+    cacheName: 'asset-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        status: [0, 200],
+      }),
+    ],
+  })
+);
 
 // ? why two registerRoute functions? seems a bit confusing. Next. CacheFirst / StaleWhileRevalidate etc.
 // more info here: https://developer.chrome.com/docs/workbox/modules/workbox-strategies/
