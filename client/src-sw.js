@@ -39,6 +39,5 @@ registerRoute(
   })
 );
 
-// ? why two registerRoute functions? seems a bit confusing. Next. CacheFirst / StaleWhileRevalidate etc.
-// more info here: https://developer.chrome.com/docs/workbox/modules/workbox-strategies/
-// Go to Slack to discuss with class.
+offlineFallback();
+
